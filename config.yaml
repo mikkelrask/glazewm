@@ -4,12 +4,13 @@ gaps:
 
 general:
   # Whether to show floating windows as always on top.
-  show_floating_on_top: false
+  show_floating_on_top: true
 
 bar:
+  font_family: "Hack Nerd Font"
   height: "30px"
   position: "top"
-  opacity: 1.0
+  opacity: 0.9
   background: "#20242cc4"
   foreground: "#ffffff"
   font_family: "Hack Nerd Font"
@@ -44,20 +45,38 @@ bar:
 
 workspaces:
   - name: "1"
+    display_name: "🚀 - To the moon"
+    bind_to_monitor: "2"
   - name: "2"
+    display_name: "📦 - Rackbeat"
+    bind_to_monitor: "1"
   - name: "3"
+    display_name: "📧 - Communication"
+    bind_to_monitor: "2"
   - name: "4"
+    display_name: "🦾 - Ralle"
+    bind_to_monitor: "1"
   - name: "5"
+    display_name: "🧑‍💻 - Code"
+    bind_to_monitor: "1"
   - name: "6"
+    display_name: "☠️ - Terminal"
+    bind_to_monitor: "1"
   - name: "7"
   - name: "8"
   - name: "9"
+    display_name: "📞"
+    bind_to_monitor: "2"
+    
 
 window_rules:
   # Task Manager requires admin privileges to manage and should be ignored unless running
   # the WM as admin.
   - command: "ignore"
     match_process_name: "Taskmgr"
+    
+  - command: "ignore"
+    match_process_name: "ueli"
 
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
@@ -66,6 +85,15 @@ window_rules:
   # Some applications (eg. Steam) have borders that extend past the normal border size.
   - command: "resize borders 0px -7px -7px -7px"
     match_process_name: "steam"
+
+  - command: "move to workspace 2"
+    match_process_name: "firefox|chrome|edge|brave|opera|vivaldi|safari|tor|ie|explorer|explorer.exe"
+
+  - command: "move to workspace 3"
+    match_process_name: "outlook|slack|teams|zoom|discord|whatsapp|telegram|signal|skype|viber|line|wechat|qq|wechat|wechat"
+  
+  - command: "move to workspace 4"
+    match_process_name: "code|sublime|vim|emacs|nvim|gvim|gedit|kate"
 
 binding_modes:
   - name: "resize"
@@ -156,6 +184,10 @@ keybindings:
   - command: "exec wsl.exe"
     binding: "Alt+Enter"
 
+  # alt+w opens firefox
+  - command: "exec firefox"
+    binding: "Alt+W"
+
   # Focus the workspace that last had focus.
   - command: "focus workspace recent"
     binding: "Alt+Y"
@@ -185,6 +217,16 @@ keybindings:
     binding: "Alt+8"
   - command: "focus workspace 9"
     binding: "Alt+9"
+
+  # Move focused workspace to a monitor in a given direction.
+  - command: "move workspace left"
+    binding: "Alt+A"
+  - command: "move workspace right"
+    binding: "Alt+F"
+  - command: "move workspace up"
+    binding: "Alt+Shift+D"
+  - command: "move workspace down"
+    binding: "Alt+S"
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ["move to workspace 1", "focus workspace 1"]
