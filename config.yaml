@@ -1,3 +1,32 @@
+# mocha.yaml
+rosewater: &rosewater "#f5e0dc"
+flamingo: &flamingo "#f2cdcd"
+pink: &pink "#f5c2e7"
+mauve: &mauve "#cba6f7"
+red: &red "#f38ba8"
+maroon: &maroon "#eba0ac"
+peach: &peach "#fab387"
+yellow: &yellow "#f9e2af"
+green: &green "#a6e3a1"
+teal: &teal "#94e2d5"
+sky: &sky "#89dceb"
+sapphire: &sapphire "#74c7ec"
+blue: &blue "#89b4fa"
+lavender: &lavender "#b4befe"
+text: &text "#cdd6f4"
+subtext1: &subtext1 "#bac2de"
+subtext0: &subtext0 "#a6adc8"
+overlay2: &overlay2 "#9399b2"
+overlay1: &overlay1 "#7f849c"
+overlay0: &overlay0 "#6c7086"
+surface2: &surface2 "#585b70"
+surface1: &surface1 "#45475a"
+surface0: &surface0 "#313244"
+base: &base "#1e1e2e"
+mantle: &mantle "#181825"
+crust: &crust "#1111b"
+
+
 gaps:
   inner_gap: 10
   outer_gap: 10
@@ -10,43 +39,55 @@ bar:
   font_family: "Hack Nerd Font"
   height: "30px"
   position: "top"
-  opacity: 0.9
-  background: "#20242cc4"
-  foreground: "#ffffff"
-  font_size: "13px"
+  opacity: .7
+  background: *base
+  foreground: *text
+  font_size: "12px"
   padding: "4px 6px"
   offset_x: "0"
   offset_y: "0"
   border_radius: "5"
   components_left:
     - type: "workspaces"
-      focused_workspace_background: "#ffffff33"
-      displayed_workspace_background: "#00000033"
-      default_workspace_background: "transparent"
+      focused_workspace_background: *flamingo
+      focused_workspace_foreground: *mantle
+      displayed_workspace_background: *crust
+      default_workspace_background: *mantle
   components_center:
     - type: "window title"
   components_right:
     - type: "battery"
-      label_draining: "{battery_level}% remaining"
+      label_draining: "{battery_level}% "
       label_power_saver: "{battery_level}% (power saver)"
       label_charging: "{battery_level}% (charging)"
+      foreground: *base
       margin: "0 4px"
-      padding: "0 8px"
+      background: *lavender
+      padding: "0 15px 0 10px"
     - type: "tiling direction"
       label_horizontal: "⮂"
       label_vertical: "⮁"
-      background: "#ffffff33"
       margin: "0 4px"
+      background: *yellow
+      foreground: *base
       padding: "0 8px"
     - type: "binding mode"
-      background: "#ffffff33"
-      margin: "0 4px 0 0"
+      background: *red
       padding: "0 8px"
     - type: "clock"
       # Documentation on formatting date/time string:
       # https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
-      time_formatting: "HH:mm  dd/MM "
-      margin: "0 0 0 10px"
+      time_formatting: "HH:mm"
+      padding: "0 5px 0 5px"
+      background: *red
+      margin: "0 4px"
+      foreground: *base
+    - type: "clock"
+      time_formatting: "dd/MM/yyyy"
+      padding: "0 8px"
+      background: *green
+      margin: "0 4px"
+      foreground: *base
 
 workspaces:
   - name: "1"
@@ -70,7 +111,7 @@ workspaces:
   - name: "7"
   - name: "8"
   - name: "9"
-    display_name: "📞"
+    display_name: "📞 - Kill me"
     bind_to_monitor: "1"
     
 
@@ -79,6 +120,9 @@ window_rules:
   # the WM as admin.
   - command: "ignore"
     match_process_name: "Taskmgr"
+  
+  - command: "ignore"
+    match_process_name: "ueli"
 
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
@@ -93,8 +137,11 @@ window_rules:
 
   - command: "move to workspace 3"
     match_process_name: "outlook|slack"
-  
+
   - command: "move to workspace 4"
+    match_process_name: "firefox"
+  
+  - command: "move to workspace 5"
     match_process_name: "code"
 
 binding_modes:
@@ -185,7 +232,11 @@ keybindings:
   # to start Windows Terminal and Git Bash respectively.
   - command: "exec wsl.exe -d Arch"
     binding: "Alt+Enter"
-    
+  
+  # bind Alt+W to open Firefox Nimghtly
+  - command: "exec msedge"
+    binding: "Alt+W"
+
   # Focus the workspace that last had focus.
   - command: "focus workspace recent"
     binding: "Alt+Y"
