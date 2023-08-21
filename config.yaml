@@ -1,3 +1,6 @@
+main: &main "1"
+vertical: &vertical "2"
+
 rosewater: &rosewater "#f5e0dc"
 flamingo: &flamingo "#f2cdcd"
 pink: &pink "#f5c2e7"
@@ -54,14 +57,14 @@ bar:
   components_center:
     - type: "window title"
   components_right:
-    - type: "battery"
-      label_draining: "{battery_level}% "
-      label_power_saver: "{battery_level}% (power saver)"
-      label_charging: "{battery_level}% (charging)"
-      foreground: *base
-      margin: "0 4px"
-      background: *lavender
-      padding: "0 15px 0 10px"
+    #    - type: "battery"
+    #     label_draining: "{battery_level}% "
+    #    label_power_saver: "{battery_level}% (power saver)"
+    #   label_charging: "{battery_level}% (charging)"
+    #  foreground: *base
+    # margin: "0 4px"
+    #      background: *lavender
+    #     padding: "0 15px 0 10px"
     - type: "tiling direction"
       label_horizontal: "⮂"
       label_vertical: "⮁"
@@ -89,28 +92,28 @@ bar:
 
 workspaces:
   - name: "1"
-    display_name: "🚀 - To the moon"
-    bind_to_monitor: "2"
+    display_name: "👻 - 1. Terminal"
+    bind_to_monitor: *vertical
   - name: "2"
-    display_name: "📦 - Rackbeat"
-    bind_to_monitor: "1"
+    display_name: "🌍 - 2. Browser"
+    bind_to_monitor: *main
   - name: "3"
-    display_name: "📧 - Communication"
-    bind_to_monitor: "2"
+    display_name: "📧 - 3. Chit chat"
+    bind_to_monitor: *main
   - name: "4"
-    display_name: "🦾 - Ralle"
-    bind_to_monitor: "1"
+    display_name: "📝 - 4. Notes"
+    bind_to_monitor: *main
   - name: "5"
-    display_name: "🧑‍💻 - Code"
-    bind_to_monitor: "1"
+    display_name: "🧑‍💻 - 5. Code"
+    bind_to_monitor: *main
   - name: "6"
-    display_name: "☠️ - Terminal"
-    bind_to_monitor: "1"
+    display_name: "🎵 - 6. Music"
+    bind_to_monitor: *vertical
   - name: "7"
   - name: "8"
   - name: "9"
-    display_name: "📞"
-    bind_to_monitor: "2"
+    display_name: "📦 - 9. Rackbeat"
+    bind_to_monitor: *vertical
 
 window_rules:
   # Task Manager requires admin privileges to manage and should be ignored unless running
@@ -121,6 +124,9 @@ window_rules:
   - command: "ignore"
     match_process_name: "ueli"
 
+  - command: "ignore"
+    match_process_name: "msexcel.exe"
+
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
     match_class_name: "#32770"
@@ -129,6 +135,9 @@ window_rules:
   - command: "resize borders 0px -7px -7px -7px"
     match_process_name: "steam"
 
+  - command: "move to workspace 1"
+    match_process_name: "wsl.exe|powershell.exe|cmd.exe|ubuntu.exe|debian.exe|kali.exe|arch.exe|alacritty|kitty|konsole|terminator|guake|tilda|yakuake|xfce4-terminal|gnome-terminal|mate-terminal|lxterminal|qterminal|terminology|st|urxvt|xterm|konsole|terminator|guake|tilda|yakuake|xfce4-terminal|gnome-terminal|mate-terminal|lxterminal|qterminal|terminology|st|urxvt|xterm"
+
   - command: "move to workspace 2"
     match_process_name: "firefox|chrome|edge|brave|opera|vivaldi|safari|tor|ie|explorer|explorer.exe"
 
@@ -136,7 +145,10 @@ window_rules:
     match_process_name: "outlook|slack|teams|zoom|discord|whatsapp|telegram|signal|skype|viber|line|wechat|qq|wechat|wechat"
 
   - command: "move to workspace 4"
-    match_process_name: "code|sublime|vim|emacs|nvim|gvim|gedit|kate"
+    match_process_name: "obsidian|notion|onenote|evernote|notion|notion.exe"
+
+  - command: "move to workspace 5"
+    match_process_name: "code.exe|sublime|vim|emacs|nvim|gvim|gedit|kate|postman|postman.exe"
 
 binding_modes:
   - name: "resize"
@@ -224,8 +236,8 @@ keybindings:
 
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
-  - command: "exec wsl.exe"
-    binding: "Alt+Enter"
+  #  - command: "exec wsl.exe -d Arch -e zsh"
+  #    binding: "Alt+Enter"
 
   # alt+w opens firefox
   - command: "exec firefox"
